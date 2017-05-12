@@ -93,5 +93,14 @@
       <End Role="客戶資料" EntitySet="客戶資料" />
       <End Role="客戶聯絡人" EntitySet="客戶聯絡人" />
     </AssociationSet>
+    <EntitySet Name="客戶清單" EntityType="客戶資料Model.客戶清單" />
   </EntityContainer>
+  <EntityType Name="客戶清單">
+    <Key>
+      <PropertyRef Name="客戶名稱" />
+    </Key>
+    <Property Name="客戶名稱" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="客戶銀行個數" Type="Int32" />
+    <Property Name="客戶聯絡人個數" Type="Int32" />
+  </EntityType>
 </Schema>

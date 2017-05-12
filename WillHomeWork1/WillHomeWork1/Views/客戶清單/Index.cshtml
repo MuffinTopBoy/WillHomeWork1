@@ -1,0 +1,31 @@
+﻿@model IEnumerable<WillHomeWork1.Models.客戶清單>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.客戶銀行個數)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.客戶聯絡人個數)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.客戶銀行個數)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.客戶聯絡人個數)
+        </td>
+    </tr>
+}
+
+</table>

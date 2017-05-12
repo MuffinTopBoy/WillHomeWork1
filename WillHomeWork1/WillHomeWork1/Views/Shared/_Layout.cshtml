@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title -我的作業一</title>
@@ -22,18 +22,30 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("首頁", "Index", "Home")</li>
-                    <li>@Html.ActionLink("關於", "About", "Home")</li>
-                    <li>@Html.ActionLink("連絡方式", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("客戶清單", "Index", "客戶清單")</li>
                     <li>@Html.ActionLink("客戶資料管理", "Index", "客戶資料")</li>
                     <li>@Html.ActionLink("客戶聯絡人管理", "Index", "客戶聯絡人")</li>
                     <li>@Html.ActionLink("客戶銀行帳戶管理", "Index", "客戶銀行資訊")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
+
         </div>
     </div>
     <div class="container body-content">
+        <div class="row">
+            <div class="col-md-6">
+            </div>
+            <div class="col-md-6">
+                <div class="input-group pull-right">
+                    <input type="text" class="form-control">
+                    <span class="input-group-btn">
+                        <button class="btn btn-secondary btn-primary" type="button">搜尋</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+
         @RenderBody()
         <hr />
         <footer>

@@ -21,6 +21,8 @@ namespace WillHomeWork1.Models
         public Nullable<int> 分行代碼 { get; set; }
         public string 帳戶名稱 { get; set; }
         public string 帳戶號碼 { get; set; }
+        public bool IsDelete { get; set; }
+        public string StartDate { get; set; }
     
         public virtual 客戶資料 客戶資料 { get; set; }
     }

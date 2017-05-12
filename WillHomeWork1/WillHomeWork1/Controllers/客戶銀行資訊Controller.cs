@@ -16,7 +16,7 @@ namespace WillHomeWork1.Models
         // GET: 客戶銀行資訊
         public ActionResult Index()
         {
-            var 客戶銀行資訊 = db.客戶銀行資訊.Include(客 => 客.客戶資料);
+            var 客戶銀行資訊 = db.客戶銀行資訊.Include(客 => 客.客戶資料).Where(x => x.IsDelete == false);
             return View(客戶銀行資訊.ToList());
         }
 
@@ -114,8 +114,11 @@ namespace WillHomeWork1.Models
         public ActionResult DeleteConfirmed(int id)
         {
             客戶銀行資訊 客戶銀行資訊 = db.客戶銀行資訊.Find(id);
-            db.客戶銀行資訊.Remove(客戶銀行資訊);
-            db.SaveChanges();
+            if (客戶銀行資訊 != null)
+            {
+                客戶銀行資訊.IsDelete = true;
+                db.SaveChanges();
+            }
             return RedirectToAction("Index");
         }
 

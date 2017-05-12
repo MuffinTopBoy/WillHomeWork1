@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -17,7 +18,8 @@ namespace WillHomeWork1.Controllers
         // GET: 客戶資料
         public ActionResult Index()
         {
-            return View(db.客戶資料.ToList());
+            var data = db.客戶資料.Where(x => x.IsDelete == false).ToList();
+            return View(data);
         }
 
         // GET: 客戶資料/Details/5
@@ -110,8 +112,11 @@ namespace WillHomeWork1.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             客戶資料 客戶資料 = db.客戶資料.Find(id);
-            db.客戶資料.Remove(客戶資料);
-            db.SaveChanges();
+            if (客戶資料 != null)
+            {
+                客戶資料.IsDelete = true;
+                db.SaveChanges();
+            }
             return RedirectToAction("Index");
         }
 

@@ -13,13 +13,14 @@ namespace WillHomeWork1.Controllers
 {
     public class 客戶資料Controller : Controller
     {
-        private 客戶資料Entities db = new 客戶資料Entities();
+        //private 客戶資料Entities db = new 客戶資料Entities();
+        客戶資料Repository repo = RepositoryHelper.Get客戶資料Repository();
 
         // GET: 客戶資料
-        public ActionResult Index()
+        public ActionResult Index(string 客戶分類)
         {
-            var data = db.客戶資料.Where(x => x.IsDelete == false).ToList();
-            return View(data);
+            ViewData.Model = repo.根據客戶分類找資料(客戶分類).ToList();
+            return View();
         }
 
         // GET: 客戶資料/Details/5
@@ -29,7 +30,7 @@ namespace WillHomeWork1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            客戶資料 客戶資料 = db.客戶資料.Find(id);
+            客戶資料 客戶資料 = repo.Find(id.Value);
             if (客戶資料 == null)
             {
                 return HttpNotFound();
@@ -52,8 +53,8 @@ namespace WillHomeWork1.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.客戶資料.Add(客戶資料);
-                db.SaveChanges();
+                repo.Add(客戶資料);
+                repo.UnitOfWork.Commit();
                 return RedirectToAction("Index");
             }
 
@@ -67,7 +68,7 @@ namespace WillHomeWork1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            客戶資料 客戶資料 = db.客戶資料.Find(id);
+            客戶資料 客戶資料 = repo.Find(id.Value);
             if (客戶資料 == null)
             {
                 return HttpNotFound();
@@ -84,8 +85,8 @@ namespace WillHomeWork1.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(客戶資料).State = EntityState.Modified;
-                db.SaveChanges();
+                repo.Update(客戶資料);
+                repo.UnitOfWork.Commit();
                 return RedirectToAction("Index");
             }
             return View(客戶資料);
@@ -98,7 +99,7 @@ namespace WillHomeWork1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            客戶資料 客戶資料 = db.客戶資料.Find(id);
+            客戶資料 客戶資料 = repo.Find(id.Value);
             if (客戶資料 == null)
             {
                 return HttpNotFound();
@@ -111,22 +112,17 @@ namespace WillHomeWork1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            客戶資料 客戶資料 = db.客戶資料.Find(id);
-            if (客戶資料 != null)
-            {
-                客戶資料.IsDelete = true;
-                db.SaveChanges();
-            }
+            客戶資料 客戶資料 = repo.Find(id);
+            repo.Delete(客戶資料);
+            repo.UnitOfWork.Commit();
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
+        public ActionResult 篩選客戶分類(string 客戶分)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+            ViewData.Model = repo.根據客戶分類找資料(客戶分);
+            return RedirectToAction("Index");
         }
+
     }
 }

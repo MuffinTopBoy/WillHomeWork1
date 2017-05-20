@@ -28,6 +28,7 @@
           <Property Name="Email" Type="nvarchar" MaxLength="250" />
           <Property Name="IsDelete" Type="bit" Nullable="false" />
           <Property Name="StartDate" Type="nvarchar" MaxLength="20" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="客戶分類" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="客戶銀行資訊">
           <Key>
@@ -141,6 +142,7 @@
           <NavigationProperty Name="客戶聯絡人" Relationship="Self.FK_客戶聯絡人_客戶資料" FromRole="客戶資料" ToRole="客戶聯絡人" />
           <Property Name="IsDelete" Type="Boolean" Nullable="false" />
           <Property Name="StartDate" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="客戶分類" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="客戶銀行資訊">
           <Key>
@@ -239,6 +241,7 @@
           <EntitySetMapping Name="客戶資料">
             <EntityTypeMapping TypeName="客戶資料Model.客戶資料">
               <MappingFragment StoreEntitySet="客戶資料">
+                <ScalarProperty Name="客戶分類" ColumnName="客戶分類" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
                 <ScalarProperty Name="Id" ColumnName="Id" />

@@ -25,6 +25,7 @@
     <NavigationProperty Name="客戶聯絡人" Relationship="Self.FK_客戶聯絡人_客戶資料" FromRole="客戶資料" ToRole="客戶聯絡人" />
     <Property Name="IsDelete" Type="Boolean" Nullable="false" />
     <Property Name="StartDate" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="客戶分類" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="客戶銀行資訊">
     <Key>

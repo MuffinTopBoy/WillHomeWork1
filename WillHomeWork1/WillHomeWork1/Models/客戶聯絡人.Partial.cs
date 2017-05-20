@@ -3,10 +3,31 @@ namespace WillHomeWork1.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using WillHomeWork1.Models;
     
     [MetadataType(typeof(客戶聯絡人MetaData))]
-    public partial class 客戶聯絡人
+    public partial class 客戶聯絡人:IValidatableObject
     {
+        客戶資料Entities db = new 客戶資料Entities();
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (this.Id == 0)
+            {
+                if (db.客戶聯絡人.Where(x => this.客戶Id == x.客戶Id && x.Email == this.Email).Any())
+                {
+                    yield return new ValidationResult("Email 已重複");
+                }
+            }
+            else
+            {
+                if (db.客戶聯絡人.Where(x => x.Id != this.Id && x.Email == this.Email && this.客戶Id==x.客戶Id).Any())
+                {
+                    yield return new ValidationResult("Email 已重複");
+                }
+            }
+        }
     }
     
     public partial class 客戶聯絡人MetaData

@@ -11,10 +11,11 @@ namespace WillHomeWork1.Controllers
     {
         客戶資料Entities db = new 客戶資料Entities();
         // GET: 客戶清單
-        public ActionResult Index()
+        public ActionResult Index(string keyword)
         {
-            var data = db.客戶清單.ToList();
-            return View(data);
+            var data = db.客戶清單.Where(x=>x.客戶名稱.Contains(keyword)).ToList();
+            ViewData.Model = data;
+            return View();
         }
     }
 }
